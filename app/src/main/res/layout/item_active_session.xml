@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Status Indicator and Subject Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <View
+                android:id="@+id/statusIndicator"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/circle_indicator"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvSubjectName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mathematics"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/grey_900"/>
+
+                <TextView
+                    android:id="@+id/tvTeacherName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/prof_jay_raghuvanshi"
+                    android:textSize="14sp"
+                    android:textColor="@color/gray_600"
+                    android:layout_marginTop="2dp"/>
+
+            </LinearLayout>
+
+            <!-- Live indicator for active sessions -->
+            <TextView
+                android:id="@+id/tvLiveIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/live"
+                android:textSize="12sp"
+                android:textColor="@color/red_600"
+                android:textStyle="bold"
+                android:background="@drawable/live_indicator_bg"
+                android:padding="4dp"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <!-- Session Details -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:contentDescription="@string/todo6"
+                android:src="@drawable/ic_clock"
+                android:layout_marginEnd="6dp"
+                app:tint="@color/gray_500"/>
+
+            <TextView
+                android:id="@+id/tvStartTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Started at 10:30 AM"
+                android:textSize="12sp"
+                android:textColor="@color/gray_600"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_people"
+                android:layout_marginEnd="6dp"
+                app:tint="@color/gray_500"/>
+
+            <TextView
+                android:id="@+id/tvAttendanceCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15 students present"
+                android:textSize="12sp"
+                android:textColor="@color/gray_600"/>
+            <!-- Add these ImageViews to your adapter's item layout file -->
+            <ImageView
+                android:id="@+id/ivSessionStatus"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_session_active"
+                app:tint="@color/green_600"
+                android:layout_marginEnd="8dp"/>
+
+            <ImageView
+                android:id="@+id/ivBluetoothStatus"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_bluetooth"
+                app:tint="@color/blue_600"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+        <!-- Bluetooth Status -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_bluetooth"
+                android:layout_marginEnd="6dp"
+                app:tint="@color/blue_500"/>
+
+            <TextView
+                android:id="@+id/tvBluetoothStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/in_range_ready_to_mark_attendance"
+                android:textSize="12sp"
+                android:textColor="@color/green_700"/>
+
+        </LinearLayout>
+
+        <!-- Action Button -->
+        <Button
+            android:id="@+id/btnJoinSession"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/mark_present1"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/green_700"
+            android:textStyle="bold"
+            app:cornerRadius="8dp"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

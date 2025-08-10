@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/ic_dashboard"
+            android:title="@string/dashboard"
+            android:checked="true" />
+        <item
+            android:id="@+id/nav_attendance"
+            android:icon="@drawable/ic_attendance"
+            android:title="@string/attendance_records" />
+        <item
+            android:id="@+id/nav_students"
+            android:icon="@drawable/ic_student"
+            android:title="@string/student_management" />
+        <item
+            android:id="@+id/nav_classes"
+            android:icon="@drawable/ic_class"
+            android:title="@string/class_management" />
+        <item
+            android:id="@+id/nav_reports"
+            android:icon="@drawable/ic_report"
+            android:title="@string/reports_analytics" />
+    </group>
+
+    <item android:title="@string/tools">
+        <menu>
+            <item
+                android:id="@+id/nav_bluetooth_settings"
+                android:icon="@drawable/ic_settings"
+                android:title="@string/bluetooth_settings" />
+            <item
+                android:id="@+id/nav_export"
+                android:icon="@drawable/ic_export"
+                android:title="@string/export_data" />
+            <item
+                android:id="@+id/nav_sync"
+                android:icon="@drawable/ic_sync"
+                android:title="@string/sync_data" />
+        </menu>
+    </item>
+
+    <item android:title="@string/account">
+        <menu>
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/ic_profile"
+                android:title="@string/profile_settings" />
+            <item
+                android:id="@+id/nav_help"
+                android:icon="@drawable/ic_help"
+                android:title="@string/help_support" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout"
+                android:title="@string/logout" />
+        </menu>
+    </item>
+
+</menu>

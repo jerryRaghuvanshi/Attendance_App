@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_student_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Dashboards.StudentDashboard">
+
+    <!-- Main Content -->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- App Bar Layout -->
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/green_700"
+                app:navigationIcon="@drawable/ic_menu"
+                app:title="Student Portal"
+                app:titleTextColor="@android:color/white"
+                app:layout_scrollFlags="scroll|enterAlways"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- Main Content with Scroll -->
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <!-- Attendance Status Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="4dp"
+                        app:cardBackgroundColor="@color/green_50">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="16dp"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:importantForAccessibility="no"
+                                android:src="@drawable/ic_wifi_signal"
+                                app:tint="@color/green_600"
+                                android:layout_marginEnd="12dp"/>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tvAttendanceStatus"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Scanning for active sessions..."
+                                    android:textSize="14sp"
+                                    android:textColor="@color/green_700"
+                                    android:textStyle="bold"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Keep Bluetooth enabled"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/green_600"
+                                    android:layout_marginTop="2dp"/>
+
+                            </LinearLayout>
+
+                            <View
+                                android:id="@+id/pulseIndicator"
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:background="@drawable/pulse_animation"
+                                android:visibility="visible"/>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Active Sessions Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="4dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <!-- Header -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="16dp"
+                                android:gravity="center_vertical"
+                                android:background="@color/blue_50">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_live_tv"
+                                    app:tint="@color/blue_600"
+                                    android:layout_marginEnd="8dp"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Active Sessions"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/blue_700"/>
+
+                                <TextView
+                                    android:id="@+id/tvActiveSessionCount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textSize="14sp"
+                                    android:textColor="@color/blue_600"
+                                    android:background="@drawable/count_indicator_bg"
+                                    android:padding="4dp"
+                                    android:minWidth="24dp"
+                                    android:gravity="center"/>
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="8dp"
+                                android:gravity="center_vertical">
+
+                                <!-- Active Sessions Tab -->
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnActiveSessions"
+                                    android:layout_width="0dp"
+                                    android:layout_height="36dp"
+                                    android:layout_weight="1"
+                                    android:text="Active"
+                                    app:cornerRadius="0dp"
+                                    app:strokeColor="@color/green_700"
+                                    app:strokeWidth="2dp"
+                                    style="@style/ActiveTabButtonStyle"/>
+
+                                <!-- Inactive Sessions Tab -->
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnInactiveSessions"
+                                    android:layout_width="0dp"
+                                    android:layout_height="36dp"
+                                    android:layout_weight="1"
+                                    android:text="Recent"
+                                    app:cornerRadius="0dp"
+                                    style="@style/InactiveTabButtonStyle"/>
+                            </LinearLayout>
+
+                            <!-- Add empty state view -->
+                            <LinearLayout
+                                android:id="@+id/emptySessionsLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:visibility="gone"
+                                android:padding="16dp">
+
+                                <ImageView
+                                    android:layout_width="64dp"
+                                    android:layout_height="64dp"
+                                    android:importantForAccessibility="no"
+                                    android:src="@drawable/ic_no_sessions"
+                                    app:tint="@color/gray_400"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="No active sessions"
+                                    android:textColor="@color/gray_600"
+                                    android:layout_marginTop="8dp"/>
+                            </LinearLayout>
+
+                            <!-- Active Sessions List -->
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvActiveSubjects"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:nestedScrollingEnabled="false"
+                                android:clipToPadding="false"
+                                android:paddingTop="8dp"
+                                android:paddingBottom="8dp"/>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Quick Mark Present Button -->
+                    <Button
+                        android:id="@+id/btnMarkPresent"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="Mark Present"
+                        android:backgroundTint="@color/green_700"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        app:cornerRadius="12dp"
+                        app:icon="@drawable/ic_check_circle"
+                        app:iconGravity="start"
+                        android:visibility="gone"/>
+
+                    <!-- Attendance Summary Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="4dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:layout_marginBottom="16dp">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:importantForAccessibility="no"
+                                    android:src="@drawable/ic_analysis"
+                                    app:tint="@color/purple_600"
+                                    android:layout_marginEnd="8dp"/>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="My Attendance"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/purple_700"/>
+
+                                <!-- Toggle button for Overall/Subject view -->
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnToggleView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="36dp"
+                                    android:text="Overall"
+                                    android:textSize="12sp"
+                                    style="@style/Widget.Material3.Button.OutlinedButton"
+                                    app:cornerRadius="18dp"
+                                    android:minWidth="80dp"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:baselineAligned="false">
+
+                                <!-- Overall/Subject Attendance -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="135dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/attendance_card_bg"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:padding="16dp">
+
+                                    <TextView
+                                        android:id="@+id/tvOverallLabel"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Overall"
+                                        android:textColor="@color/white"
+                                        android:textSize="14sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvOverallStats"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="4dp"
+                                        android:text="0/0 sessions"
+                                        android:textColor="@color/gray_500"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvOverallPercentage"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0%"
+                                        android:textColor="@color/green_700"
+                                        android:textSize="32sp"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/gray_300"
+                                    android:layout_marginHorizontal="8dp"/>
+
+                                <!-- Current Subject -->
+                                <LinearLayout
+                                    android:id="@+id/layoutSubjectAttendance"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="135dp"
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:background="@drawable/attendance_card_bg"
+                                    android:padding="16dp"
+                                    android:clickable="true"
+                                    android:focusable="true">
+
+                                    <TextView
+                                        android:id="@+id/tvSubjectName"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="No data"
+                                        android:textColor="@color/white"
+                                        android:textSize="14sp"
+                                        android:textAlignment="center"/>
+
+                                    <TextView
+                                        android:id="@+id/tvSubjectStats"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0/0 sessions"
+                                        android:textColor="@color/gray_500"
+                                        android:textSize="12sp"
+                                        android:layout_marginTop="4dp"/>
+
+                                    <ImageView
+                                        android:layout_width="16dp"
+                                        android:layout_height="16dp"
+                                        android:src="@drawable/ic_touch"
+                                        app:tint="@color/gray_400"
+                                        android:layout_marginTop="4dp"
+                                        android:importantForAccessibility="no"/>
+
+                                    <TextView
+                                        android:id="@+id/tvSubjectPercentage"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0%"
+                                        android:textColor="@color/blue_700"
+                                        android:textSize="32sp"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <!-- Attendance Chart -->
+                            <com.github.mikephil.charting.charts.PieChart
+                                android:id="@+id/pieChart"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp"
+                                android:layout_marginTop="16dp"/>
+
+                            <!-- Attendance Legend -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center"
+                                android:layout_marginTop="8dp">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    android:layout_marginEnd="16dp">
+
+                                    <View
+                                        android:layout_width="12dp"
+                                        android:layout_height="12dp"
+                                        android:background="@color/green_600"
+                                        android:layout_marginEnd="6dp"/>
+
+                                    <TextView
+                                        android:id="@+id/tvPresentCount"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Present (0)"
+                                        android:textSize="12sp"
+                                        android:textColor="@color/gray_700"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical">
+
+                                    <View
+                                        android:layout_width="12dp"
+                                        android:layout_height="12dp"
+                                        android:background="@color/red_600"
+                                        android:layout_marginEnd="6dp"/>
+
+                                    <TextView
+                                        android:id="@+id/tvAbsentCount"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Absent (0)"
+                                        android:textSize="12sp"
+                                        android:textColor="@color/gray_700"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <!-- Subject Selection Spinner (for detailed view) -->
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/layoutSubjectSpinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:visibility="gone"
+                                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/spinnerSubject"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Select Subject"
+                                    android:inputType="none"
+                                    android:textSize="14sp"/>
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Attendance History -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="4dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="16dp"
+                                android:gravity="center_vertical"
+                                android:background="@color/orange_50">
+
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:importantForAccessibility="no"
+                                    android:src="@drawable/ic_history"
+                                    app:tint="@color/orange_600"
+                                    android:layout_marginEnd="8dp"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Recent Attendance"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/black"/>
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvAttendanceHistory"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:nestedScrollingEnabled="false"
+                                android:clipToPadding="false"
+                                android:padding="8dp"/>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <!-- Navigation Drawer -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header_student"
+        app:menu="@menu/student_drawer_menu"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>
